@@ -1,0 +1,51 @@
+pipeline {
+    agent {
+        label 'docker'
+    } 
+    environment {
+        ANDROID_HOME = tool name: 'androidSdk'
+    }
+    tools {
+       gradle "gradle562"
+   }
+    stages
+    {
+
+        stage("Build")
+        {
+            steps{
+                sh '''gradle --version'''
+                sh './gradlew clean' //run a gradle task
+                echo "The build stage passed..."
+            }
+        }
+        stage("test") {
+            steps{
+                echo "The test stage passed..."
+            }
+        }
+        // stage("Signing APK"){
+            // steps{
+                // gradle {
+                    // rootBuildScriptDir 'myApp'
+                    // useWrapper true
+                    // tasks 'clean assembleRelease'
+                // }
+                // echo "Signing APK"
+                // withCredentials([certificate(aliasVariable: 'MulticertCertificate', credentialsId: 'certificate_P12_ID', keystoreVariable: 'certificate_content', passwordVariable: 'certificate_password')]) {
+                    // signAndroidApks (
+                        // keyStoreId: "myApp.signerKeyStore",
+                        // keyAlias: "myTeam",
+                        // apksToSign: "**/*-unsigned.apk"
+                        // uncomment the following line to output the signed APK to a separate directory as described above
+                        // signedApkMapping: [ $class: UnsignedApkBuilderDirMapping ]
+                        // uncomment the following line to output the signed APK as a sibling of the unsigned APK, as described above, or just omit signedApkMapping
+                        // you can override these within the script if necessary
+                        // androidHome: env.ANDROID_HOME
+                        // zipalignPath: env.ANDROID_ZIPALIGN
+    // )
+                // }
+            // }
+        // }
+    }
+}
