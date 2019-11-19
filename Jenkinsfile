@@ -42,7 +42,7 @@ pipeline {
                         // uncomment the following line to output the signed APK as a sibling of the unsigned APK, as described above, or just omit signedApkMapping
                         // you can override these within the script if necessary
                         // androidHome: env.ANDROID_HOME
-                        // zipalignPath: env.ANDROID_ZIPALIGN
+                        //  zipalignPath: env.ANDROID_ZIPALIGN
     // )
                 // }
             // }
